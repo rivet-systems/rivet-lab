@@ -1,7 +1,6 @@
 import pathlib
 import subprocess
 import sys
-import json
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CLI = ROOT / "cli.py"
@@ -39,7 +38,12 @@ def test_validate_manifest_ok(tmp_path):
 
 def test_validate_manifest_fail(tmp_path):
     manifest = tmp_path / "m.yaml"
-    manifest.write_text("schema: permission-manifest/v0.1\nname: example\nversion: 0.1.0\npermissions: {}\n")
+    manifest.write_text(
+        "schema: permission-manifest/v0.1\n"
+        "name: example\n"
+        "version: 0.1.0\n"
+        "permissions: {}\n"
+    )
     res = run(["validate-manifest", str(manifest)])
     assert res.returncode != 0
     assert "filesystem" in res.stderr or "network" in res.stderr

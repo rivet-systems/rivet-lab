@@ -9,8 +9,8 @@ Commands:
 import argparse
 import datetime as dt
 import json
-import sys
 import pathlib
+import sys
 from typing import Any, Dict, List
 
 try:
@@ -97,7 +97,9 @@ def validate_manifest(data: Dict[str, Any]) -> List[str]:
                 errors.append(f"processes[{i}] missing name")
 
     if not any([fs, net, secrets, procs]):
-        errors.append("permissions must declare at least one of filesystem/network/secrets/processes")
+        errors.append(
+            "permissions must declare at least one of filesystem/network/secrets/processes"
+        )
 
     return errors
 
